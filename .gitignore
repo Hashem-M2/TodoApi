@@ -1,2 +1,10 @@
-"bin/" 
-"obj/" 
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.ncb
+*.log
+*.dmp
+*.dbmdl
+*.bak
