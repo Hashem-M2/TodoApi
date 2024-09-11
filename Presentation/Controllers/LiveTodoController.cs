@@ -7,7 +7,7 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-   [AllowAnonymous]
+    [Authorize]
     public class LiveTodoController : ControllerBase
     {
         private readonly ITodoService _toDoService;
