@@ -28,8 +28,6 @@ namespace Infrastructural.Repository
             return result;
         }
 
-
-
         public Task<TEntity> DeleteAsync(TEntity entity)
         {
             return Task.FromResult(_Dbset.Remove(entity).Entity);

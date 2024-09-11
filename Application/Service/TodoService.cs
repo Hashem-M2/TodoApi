@@ -1,5 +1,4 @@
 ﻿using Application.Contract.IUnitOfWork;
-
 using DTOS;
 using DTOS.TodoDto;
 using Models;
@@ -55,22 +54,6 @@ namespace Application.Service
             return _mapper.Map<TodoCreateDto>(createdTodo);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public async Task<TodoUpdateDto> UpdateTodoAsync(TodoUpdateDto todoUpdateDto)
         {
             var existingTodo = await _unitOfWork.Todos.GetByIdAsync(todoUpdateDto.Id);
@@ -99,7 +82,6 @@ namespace Application.Service
         }
 
 
-
         public async Task<TodoDto> GetTodoByIdAsync(int id)
         {
             var todoItem = await _unitOfWork.Todos.GetByIdAsync(id);
@@ -115,17 +97,12 @@ namespace Application.Service
 
         public async Task<List<TodoDto>> GetAllToDosAsync(int pageNumber, int pageSize)
         {
-            // Assuming this method returns Task<IQueryable<TodoItem>>
             var todosQuery = await _unitOfWork.Todos.GetAllAsync();
-
-            // Apply pagination and map
             var todosDtoQuery = _mapper.ProjectTo<TodoDto>(todosQuery);
-
-            // Now you can use Skip and Take
             var pagedTodosDto = await todosDtoQuery
                                     .Skip((pageNumber - 1) * pageSize)
                                     .Take(pageSize)
-                                    .ToListAsync();  // Materialize the query to a list
+                                    .ToListAsync();  
 
             return pagedTodosDto;
         }

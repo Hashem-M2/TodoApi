@@ -36,8 +36,6 @@ namespace Presentation
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-
-
             builder.Services.AddSwaggerGen(option =>
             {
                 option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
@@ -66,6 +64,7 @@ namespace Presentation
             });
             });
 
+
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -83,6 +82,11 @@ namespace Presentation
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
                 };
             });
+
+
+            builder.Services.AddCors();
+            
+
             builder.Services.AddControllers();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IAccountService,AccountService>();
@@ -102,7 +106,9 @@ namespace Presentation
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseCors(c => c.AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowAnyOrigin());
             app.UseAuthorization();
 
 

@@ -44,16 +44,6 @@ namespace Presentation.Controllers
             return Ok(createdTodo);
         }
 
-
-
-
-
-
-
-
-
-
-
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTodo(int id, [FromBody] TodoUpdateDto todoUpdateDto)
         {
